@@ -1,9 +1,7 @@
-from ctypes import alignment
 from app import *
-import time
 import keyboard
 import pyautogui
- 
+import time
 
 # Bot methods
 def clic(x,y,times):
