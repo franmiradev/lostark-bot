@@ -30,20 +30,21 @@ def createWindows():
                         font=("-size", 10, "-weight", "bold"),
                         image=archerImage)
     archerLabel.grid(row=5, column=0, pady=40, columnspan=1)
+    archerLabel.place(relx=0.5, rely=0.85, anchor='center')
     archerLabel.image=archerImage
     
     buyerLabel = tk.Label(buyerTab, text= 'OPEN THE AUCTION AT THE GAME',
                         justify='center', 
                         font=("-size", 10, "-weight", "bold"))
     buyerLabel.grid(row=0, column=0, pady=10, columnspan=1)
-    
+    buyerLabel.place(relx=0.5, rely=0.07, anchor='center')
     boton = ttk.Button(buyerTab, text="Run", style='Accent.TButton')
     boton.grid(row=2, column=0, padx=5, pady=10, sticky="nsew")
     boton.place(relx=0.5, rely=0.5, anchor='center')
     
     entryPrice = ttk.Entry(buyerTab)
     entryPrice.insert(0, "Price")
-    entryPrice.grid(row=1, column=0, padx=80, pady=(30, 10), sticky="new")
+    entryPrice.grid(row=1, column=0, padx=80, pady=(60, 10), sticky="new")
     
     entryName = ttk.Entry(buyerTab)
     entryName.insert(0, "Item")
@@ -52,30 +53,32 @@ def createWindows():
     rememberLabel = tk.Label(buyerTab, text= 'IMPORTANT: Remember, press \'Ctrl\' until bot stop \n when is running',
                         anchor='center', 
                         font=("-size", 8, "-weight", "bold"))
-    rememberLabel.grid(row=5, column=0, pady=50, columnspan=2)
+    rememberLabel.grid(row=5, column=0, pady=10, columnspan=2)
+    rememberLabel.place(relx=0.5, rely=0.85, anchor='center')
     
-    # MAILBOX
+    # MAILBOX    
+    mailLabel = tk.Label(mailTab, text= 'OPEN THE MAILBOX AT THE GAME', 
+                         anchor='center', 
+                         font=("-size", 10, "-weight", "bold",))
+    mailLabel.grid(row=0, column=0, pady=10, columnspan=1)
+    mailLabel.place(relx=0.5, rely=0.07, anchor='center')
+    
+    clearBoton = ttk.Button(mailTab, text="Clear", style='Accent.TButton', command=clearMail)
+    clearBoton.grid(row=2, column=0, padx=5, pady=10, sticky="nsew")
+    clearBoton.place(relx=0.5, rely=0.5, anchor='center')
+    
     archerLabel = tk.Label(mailTab,
                         justify='center', 
                         font=("-size", 10, "-weight", "bold"),
                         image=archerImage)
-    archerLabel.grid(row=2, column=0, pady=40, columnspan=2)
+    archerLabel.grid(row=2, column=0, pady=10, columnspan=1)
+    archerLabel.place(relx=0.5, rely=0.85, anchor='center')
     archerLabel.image=archerImage
-    
-    mailLabel = tk.Label(mailTab, text= 'OPEN THE MAILBOX AT THE GAME', 
-                         anchor='center', 
-                         font=("-size", 10, "-weight", "bold"))
-    mailLabel.grid(row=0, column=0, pady=10, columnspan=1)
-    
-    clearBoton = ttk.Button(mailTab, text="Clear", style='Accent.TButton', command=clearMail)
-    clearBoton.grid(row=1, column=0, padx=5, pady=10)
-    clearBoton.place(relx=0.5, rely=0.5, anchor='center')
-    
     rememberLabel = tk.Label(mailTab, text= 'IMPORTANT: Remember, press \'Ctrl\' until bot stop \n when is running',
-                        anchor='center', 
+                        justify='center', 
                         font=("-size", 8, "-weight", "bold"))
-    rememberLabel.grid(row=2, column=0, pady=245, columnspan=1)
-    
+    rememberLabel.grid(row=2, column=0, pady=245, columnspan=2)
+    rememberLabel.place(relx=0.5, rely=0.85, anchor='center')
 
     
-    tab_control.pack(side = "bottom", fill = "both", expand = "yes")
+    tab_control.pack(fill = "both", expand = "yes")
