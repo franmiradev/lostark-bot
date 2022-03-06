@@ -1,3 +1,4 @@
+from buyer import *
 from mailbox import *
 from PIL import Image, ImageTk
 import tkinter as tk
@@ -18,13 +19,14 @@ def main_app():
 def createWindows():
     tab_control = ttk.Notebook(window)
     # must keep a global reference to these two
-    archerImage = ImageTk.PhotoImage(Image.open('images/archer.png').resize((200, 200), Image.ANTIALIAS))
     
+    # BUYER TAB
     buyerTab = ttk.Frame(tab_control)
     tab_control.add(buyerTab, text='Buy items')
     mailTab = ttk.Frame(tab_control)
     tab_control.add(mailTab, text='Clear mail box')
     
+    archerImage = ImageTk.PhotoImage(Image.open('images/archer.png').resize((200, 200), Image.ANTIALIAS))
     archerLabel = tk.Label(buyerTab,
                         justify='center', 
                         font=("-size", 10, "-weight", "bold"),
@@ -38,17 +40,24 @@ def createWindows():
                         font=("-size", 10, "-weight", "bold"))
     buyerLabel.grid(row=0, column=0, pady=10, columnspan=1)
     buyerLabel.place(relx=0.5, rely=0.07, anchor='center')
-    boton = ttk.Button(buyerTab, text="Run", style='Accent.TButton')
-    boton.grid(row=2, column=0, padx=5, pady=10, sticky="nsew")
-    boton.place(relx=0.5, rely=0.5, anchor='center')
     
+    # BUYER INPUTS
     entryPrice = ttk.Entry(buyerTab)
     entryPrice.insert(0, "Price")
-    entryPrice.grid(row=1, column=0, padx=80, pady=(60, 10), sticky="new")
+    entryPrice.grid(row=1, column=0, padx=80, pady=(40, 10), sticky="new")
+    
+    amount = ttk.Entry(buyerTab)
+    amount.insert(1, "Amount")
+    amount.grid(row=3, column=0, padx=80, pady=(2, 10), sticky="new")
     
     entryName = ttk.Entry(buyerTab)
     entryName.insert(0, "Item")
-    entryName.grid(row=4, column=0, padx=80, pady=(5, 10), sticky="new")
+    entryName.grid(row=4, column=0, padx=80, pady=(2, 10), sticky="new")
+    
+    boton = ttk.Button(buyerTab, text="Run", style='Accent.TButton',
+                       command=lambda:testButton(entryPrice.get(),amount.get(), entryName.get()))
+    boton.grid(row=2, column=0, padx=5, pady=10, sticky="nsew")
+    boton.place(relx=0.5, rely=0.5, anchor='center')
     
     rememberLabel = tk.Label(buyerTab, text= 'IMPORTANT: Remember, press \'Ctrl\' until bot stop \n when is running',
                         anchor='center', 
@@ -80,5 +89,4 @@ def createWindows():
     rememberLabel.grid(row=2, column=0, pady=245, columnspan=2)
     rememberLabel.place(relx=0.5, rely=0.85, anchor='center')
 
-    
     tab_control.pack(fill = "both", expand = "yes")
