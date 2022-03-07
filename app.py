@@ -2,6 +2,7 @@ from buyer import *
 from mailbox import *
 from PIL import Image, ImageTk
 import tkinter as tk
+from tkinter import messagebox
 from tkinter import ttk
 
 window = tk.Tk()
@@ -11,10 +12,11 @@ window.tk.call("set_theme", "dark")
 # Tkinter methods
 def main_app():
     window.title("LostArk Bot")
-    window.geometry('350x400')
+    window.geometry('350x450')
     createWindows()
     window.resizable(False, False) 
-    window.mainloop()
+    window.attributes('-topmost',True)
+    window.mainloop() 
 
 def createWindows():
     tab_control = ttk.Notebook(window)
@@ -43,19 +45,19 @@ def createWindows():
     
     # BUYER INPUTS
     entryPrice = ttk.Entry(buyerTab)
-    entryPrice.insert(0, "Price")
+    entryPrice.insert(0, "Price (Integer)")
     entryPrice.grid(row=1, column=0, padx=80, pady=(40, 10), sticky="new")
     
     amount = ttk.Entry(buyerTab)
-    amount.insert(1, "Amount")
+    amount.insert(1, "Amount (Integer)")
     amount.grid(row=3, column=0, padx=80, pady=(2, 10), sticky="new")
-    
+
     entryName = ttk.Entry(buyerTab)
     entryName.insert(0, "Item")
     entryName.grid(row=4, column=0, padx=80, pady=(2, 10), sticky="new")
     
-    boton = ttk.Button(buyerTab, text="Run", style='Accent.TButton',
-                       command=lambda:testButton(entryPrice.get(),amount.get(), entryName.get()))
+    boton = ttk.Button(buyerTab, text="Run", style='Accent.TButton', 
+        command=lambda:buy_item(int(entryPrice.get()),int(amount.get()), entryName.get()))
     boton.grid(row=2, column=0, padx=5, pady=10, sticky="nsew")
     boton.place(relx=0.5, rely=0.5, anchor='center')
     
