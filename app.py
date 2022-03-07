@@ -1,5 +1,6 @@
 from buyer import *
 from mailbox import *
+from noafk import *
 from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import messagebox
@@ -24,21 +25,21 @@ def createWindows():
     tab_control = ttk.Notebook(window)
     # must keep a global reference to these two
     archerImage = ImageTk.PhotoImage(Image.open('images/archer.png').resize((200, 200), Image.ANTIALIAS))
-    # BUYER TAB
+    
     buyerTab = ttk.Frame(tab_control)
     tab_control.add(buyerTab, text='Buy items')
     mailTab = ttk.Frame(tab_control)
     tab_control.add(mailTab, text='Clear mail box')
     noAfkTab = ttk.Frame(tab_control)
-    tab_control.add(noAfkTab, text='No AFK')
+    tab_control.add(noAfkTab, text='No Afk')
     
+    # BUYER
     buyerLabel = tk.Label(buyerTab, text= 'OPEN THE AUCTION AT THE GAME',
                         justify='center', 
                         font=("-size", 10, "-weight", "bold"))
     buyerLabel.grid(row=0, column=0, pady=10, columnspan=1)
     buyerLabel.place(relx=0.5, rely=0.07, anchor='center')
     
-    # BUYER INPUTS
     entryPrice = ttk.Entry(buyerTab)
     entryPrice.insert(0, "Price (Integer)")
     entryPrice.grid(row=1, column=0, padx=80, pady=(40, 10), sticky="new")
@@ -71,6 +72,26 @@ def createWindows():
     
     bottomLabel(mailTab)
 
+    # NO AFK
+    noAfkLabel = tk.Label(noAfkTab, text= 'BE FAR OF ANY NPC TO AVOID CLIC', 
+                         anchor='center', 
+                         font=("-size", 10, "-weight", "bold",))
+    noAfkLabel.grid(row=1, column=0, pady=10, columnspan=1)
+    noAfkLabel.place(relx=0.5, rely=0.07, anchor='center')
+
+    radioValue = tk.StringVar()
+    radioRight = tk.Radiobutton(noAfkLabel, text='Right',
+                                variable=radioValue, value="Right") 
+    radioRight.grid(row=3, column=0, padx=50, pady=(200, 0), sticky="w")
+    
+    radioLeft = tk.Radiobutton(noAfkLabel, text='Left',
+                                variable=radioValue, value="Left") 
+    radioLeft.grid(row=3, column=1, padx=50, pady=(200, 0), sticky="w")
+    
+    noAfkButton = ttk.Button(noAfkTab, text="No Afk", style='Accent.TButton', command=run_no_afk)
+    noAfkButton.grid(row=5, column=0, padx=5, pady=100, sticky="nsew")
+    noAfkButton.place(relx=0.5, rely=0.5, anchor='center')
+    
     bottomLabel(noAfkTab)
 
     tab_control.pack(fill = "both", expand = "yes")
@@ -85,7 +106,7 @@ def bottomLabel(tab):
     archerLabel.grid(row=2, column=0, pady=10, columnspan=1)
     archerLabel.place(relx=0.5, rely=0.85, anchor='center')
     archerLabel.image=archerImage
-    rememberLabel = tk.Label(tab, text= 'IMPORTANT: Remember, press \'Ctrl\' until bot stop \n when is running',
+    rememberLabel = tk.Label(tab, text= 'IMPORTANT: Remember, keep press \'Ctrl\' until bot \n stop when is running',
                         justify='center', 
                         font=("-size", 8, "-weight", "bold"))
     rememberLabel.grid(row=2, column=0, pady=245, columnspan=2)
