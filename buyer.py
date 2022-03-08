@@ -7,8 +7,8 @@ buy_button_x = 2088
 buy_button_y = 1232
 item_x = 954
 item_y = 442
-add_x = 1458
-add_y = 678
+add_x = 1376
+add_y = 692
 price_x = 1356 
 price_y = 744
 buy_final_x = 1281
@@ -19,9 +19,7 @@ confirm_y = 780
 def clic(x,y,times):
     print(f"{x}, {y}")
     pyautogui.moveTo(x, y,duration=0.1, tween=pyautogui.easeInOutQuad)
-    if times>1:
-        pyautogui.doubleClick()
-    else:
+    for i in range(0, times):
         pyautogui.click()
     time.sleep(0)
     
@@ -30,7 +28,8 @@ def buy_item(entryPrice, amount, itemName):
     while loop:
         clic(item_x, item_y,2)
         clic(buy_button_x, buy_button_y,1)
-        clic(add_x, add_y,1)
+        clic(add_x, add_y,2)
+        keyboard.write(str(amount))
         clic(price_x, price_y,2)
         keyboard.write(str(entryPrice))
         clic(buy_final_x, buy_final_y,2)

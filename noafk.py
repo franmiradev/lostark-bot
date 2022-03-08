@@ -18,8 +18,6 @@ def run_no_afk():
         x = h + r*cos(theta)
         y = k + r*sin(theta)
 
-        print(f"{x}, {y}")
-
         if theta == 360:
             theta = 0
 
