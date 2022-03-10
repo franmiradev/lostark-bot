@@ -21,6 +21,10 @@ def main_app():
     window.attributes('-topmost',True)
     window.mainloop() 
 
+def callbackFunc(event):
+    global mouseMove
+    mouseMove = event.widget.get()
+
 def createWindows():
     tab_control = ttk.Notebook(window)
     # must keep a global reference to these two
@@ -48,12 +52,14 @@ def createWindows():
     amount.insert(1, "Amount (Integer)")
     amount.grid(row=3, column=0, padx=80, pady=(2, 10), sticky="new")
 
-    entryName = ttk.Entry(buyerTab)
-    entryName.insert(0, "Item")
-    entryName.grid(row=4, column=0, padx=80, pady=(2, 10), sticky="new")
-    
+    selectMove = ttk.Combobox(buyerTab)
+    selectMove["values"] = ("right", "left")
+    selectMove.grid(row=4, column=0, padx=80, pady=(2, 10), sticky="new")
+
+    selectMove.bind("<<ComboboxSelected>>", callbackFunc)
+
     boton = ttk.Button(buyerTab, text="Run", style='Accent.TButton', 
-        command=lambda:buy_item(int(entryPrice.get()),int(amount.get()), entryName.get()))
+        command=lambda:buy_item(int(entryPrice.get()),int(amount.get()), mouseMove))
     boton.grid(row=2, column=0, padx=5, pady=10, sticky="nsew")
     boton.place(relx=0.5, rely=0.5, anchor='center')
     
@@ -81,6 +87,7 @@ def createWindows():
 
     labelTop = tk.Label(noAfkLabel, text = "Choose your mouse clic to move at the game")
     labelTop.place(relx=0.5, rely=0.09, anchor='center')
+
     selectMove = ttk.Combobox(noAfkLabel, state="readonly")
     selectMove["values"] = ["right", "left"]
     selectMove.grid(row=4, column=0, padx=80, pady=(230, 10), sticky="new")

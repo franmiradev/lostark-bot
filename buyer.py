@@ -20,8 +20,8 @@ move_left_x = 11
 move_left_y = 579
 move_right_x = 2540
 move_right_y = 887
-
-minutes = 5*60
+minutes = 5
+seconds = 2*minutes
 
 def clic(x,y,times):
     pyautogui.moveTo(x, y,duration=0.1, tween=pyautogui.easeInOutQuad)
@@ -29,23 +29,22 @@ def clic(x,y,times):
         pyautogui.click()
     time.sleep(0)
     
-def no_afk():
+def no_afk(mouseMove):
     if bool(random.getrandbits(1)):
         pyautogui.moveTo(move_right_x, move_right_y,duration=0.1, tween=pyautogui.easeInOutQuad)
     else:
         pyautogui.moveTo(move_left_x, move_left_y,duration=0.1, tween=pyautogui.easeInOutQuad)
-
-    pyautogui.click(button='right')
+    print(mouseMove)
+    pyautogui.click(button=mouseMove)
     keyboard.press('t')
     keyboard.release('t')
     keyboard.press('t')
     keyboard.release('t')
     start = time.time()
 
-def buy_item(entryPrice, amount, itemName):
+def buy_item(entryPrice, amount, mouseMove):
     loop = True
-    start = time.time()    
-
+    start = time.time() 
     while loop:
         clic(item_x, item_y,2)
         clic(buy_button_x, buy_button_y,1)
@@ -56,8 +55,8 @@ def buy_item(entryPrice, amount, itemName):
         clic(buy_final_x, buy_final_y,2)
         clic(confirm_x, confirm_y,2)
         timeAlive = time.time() - start
-        if timeAlive >= minutes:
-            no_afk()
+        if timeAlive >= seconds:
+            no_afk(str(mouseMove))
         if keyboard.is_pressed("ctrl"):
             loop = False 
            
