@@ -1,5 +1,6 @@
 import keyboard
 import pyautogui
+import random
 import time
 from tkinter import messagebox
 
@@ -15,16 +16,36 @@ buy_final_x = 1281
 buy_final_y = 1082
 confirm_x = 1280
 confirm_y = 780
+move_left_x = 11
+move_left_y = 579
+move_right_x = 2540
+move_right_y = 887
+
+minutes = 5*60
 
 def clic(x,y,times):
-    print(f"{x}, {y}")
     pyautogui.moveTo(x, y,duration=0.1, tween=pyautogui.easeInOutQuad)
     for i in range(0, times):
         pyautogui.click()
     time.sleep(0)
     
+def no_afk():
+    if bool(random.getrandbits(1)):
+        pyautogui.moveTo(move_right_x, move_right_y,duration=0.1, tween=pyautogui.easeInOutQuad)
+    else:
+        pyautogui.moveTo(move_left_x, move_left_y,duration=0.1, tween=pyautogui.easeInOutQuad)
+
+    pyautogui.click(button='right')
+    keyboard.press('t')
+    keyboard.release('t')
+    keyboard.press('t')
+    keyboard.release('t')
+    start = time.time()
+
 def buy_item(entryPrice, amount, itemName):
-    loop = True    
+    loop = True
+    start = time.time()    
+
     while loop:
         clic(item_x, item_y,2)
         clic(buy_button_x, buy_button_y,1)
@@ -34,6 +55,9 @@ def buy_item(entryPrice, amount, itemName):
         keyboard.write(str(entryPrice))
         clic(buy_final_x, buy_final_y,2)
         clic(confirm_x, confirm_y,2)
+        timeAlive = time.time() - start
+        if timeAlive >= minutes:
+            no_afk()
         if keyboard.is_pressed("ctrl"):
             loop = False 
            
