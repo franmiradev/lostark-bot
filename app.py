@@ -34,8 +34,6 @@ def createWindows():
     tab_control.add(buyerTab, text='Buy items')
     mailTab = ttk.Frame(tab_control)
     tab_control.add(mailTab, text='Clear mail box')
-    noAfkTab = ttk.Frame(tab_control)
-    tab_control.add(noAfkTab, text='No Afk')
     
     # BUYER
     buyerLabel = tk.Label(buyerTab, text= 'OPEN THE AUCTION AT THE GAME',
@@ -77,26 +75,6 @@ def createWindows():
     clearBoton.place(relx=0.5, rely=0.5, anchor='center')
     
     bottomLabel(mailTab)
-
-    # NO AFK
-    noAfkLabel = tk.Label(noAfkTab, text= 'BE FAR OF ANY NPC TO AVOID CLIC', 
-                         anchor='center', 
-                         font=("-size", 10, "-weight", "bold",))
-    noAfkLabel.grid(row=1, column=0, pady=10, columnspan=1)
-    noAfkLabel.place(relx=0.5, rely=0.07, anchor='center')
-
-    labelTop = tk.Label(noAfkLabel, text = "Choose your mouse clic to move at the game")
-    labelTop.place(relx=0.5, rely=0.09, anchor='center')
-
-    selectMove = ttk.Combobox(noAfkLabel, state="readonly")
-    selectMove["values"] = ["right", "left"]
-    selectMove.grid(row=4, column=0, padx=80, pady=(230, 10), sticky="new")
-    
-    noAfkButton = ttk.Button(noAfkTab, text="No Afk", style='Accent.TButton', command=run_no_afk)
-    noAfkButton.grid(row=5, column=0, padx=5, pady=100, sticky="nsew")
-    noAfkButton.place(relx=0.5, rely=0.5, anchor='center')
-    
-    bottomLabel(noAfkTab)
 
     tab_control.pack(fill = "both", expand = "yes")
 
