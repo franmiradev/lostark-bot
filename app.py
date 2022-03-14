@@ -1,6 +1,5 @@
 from buyer import *
 from mailbox import *
-from noafk import *
 from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import messagebox

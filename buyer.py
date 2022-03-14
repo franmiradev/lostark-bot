@@ -9,7 +9,7 @@ w = res.width
 h = res.height
 
 minutes = 5
-seconds = 60*minutes
+seconds = 5
 
 def clic(position, times):
     print(w)
@@ -29,6 +29,11 @@ def map(position):
     return position
 
 def no_afk(mouseMove):
+    if w != 2560 or h != 1440:
+        move_left = map(move_left)
+        move_right = map(move_right)
+    move_left = { "x":11, "y":579 }
+    move_right = { "x":2540, "y":887 }
     if bool(random.getrandbits(1)):
         pyautogui.moveTo(move_right["x"], move_right["y"],duration=0.1, tween=pyautogui.easeInOutQuad)
     else:
